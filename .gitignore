@@ -1,0 +1,36 @@
+# Python Virtual Environments
+.venv*/
+venv/
+ENV/
+env/
+*.env
+
+# Python cache files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Output directory (transcripts, redacted videos, etc.)
+output/
+
+# Large media files (videos, audio)
+*.mp4
+*.avi
+*.mov
+*.wav
+*.mp3
+# Add other video/audio extensions if needed
+
+# VS Code specific settings
+.vscode/
+
+# Operating System generated files
+.DS_Store
+Thumbs.db
+
+# Downloaded models cache (adjust path if Whisper caches elsewhere)
+# .cache/
+
+# Temporary test file
+temp_test.py
