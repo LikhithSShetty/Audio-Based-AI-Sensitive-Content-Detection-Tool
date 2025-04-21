@@ -1,0 +1,13 @@
+keywords:
+  - confidential
+  - sensitive
+  - personal
+  - proprietary
+  - project name
+  - company name
+
+parameters:
+  min_confidence_score: 0.75
+  max_flagged_segments: 10
+  enable_semantic_matching: true
+  semantic_model: "sentence-transformers/all-MiniLM-L6-v2"

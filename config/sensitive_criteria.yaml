@@ -1,0 +1,24 @@
+# filepath: config/sensitive_criteria.yaml
+# Example configuration for sensitive content criteria
+
+# Simple keyword matching (case-insensitive)
+keywords:
+  - "secret"
+  - "confidential"
+  - "password"
+  # Add more keywords as needed
+  - "break a leg" # Example phrase from the transcript
+  - "timbre"      # Example word from the transcript
+
+# Named Entity Recognition (NER) - Placeholder for future implementation
+# ner_types:
+#   - PERSON
+#   - ORG
+#   - GPE # Geopolitical Entity (locations)
+#   - CREDIT_CARD
+#   - EMAIL_ADDRESS
+
+# Semantic Search - Placeholder for future implementation
+# semantic_topics:
+#   - "financial information"
+#   - "personal health information"
