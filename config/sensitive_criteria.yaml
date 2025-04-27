@@ -1,24 +1,32 @@
 # filepath: config/sensitive_criteria.yaml
 # Example configuration for sensitive content criteria
 
+# --- Whisper Settings ---
+whisper_model: "base" # Use 'base' model for better accuracy
+language: "en"        # Explicitly set language to English
+
+# --- Output Settings ---
+output_directory: "output"
+
+# --- Identification Criteria ---
 # Simple keyword matching (case-insensitive)
 keywords:
   - "secret"
-  - "confidential"
-  - "password"
-  # Add more keywords as needed
-  - "break a leg" # Example phrase from the transcript
-  - "timbre"      # Example word from the transcript
+  # - "confidential" # Example
+  # - "project alpha" # Example multi-word
+  - "Alliance" # Example word from the transcript
 
 # Named Entity Recognition (NER) - Placeholder for future implementation
 # ner_types:
-#   - PERSON
-#   - ORG
-#   - GPE # Geopolitical Entity (locations)
-#   - CREDIT_CARD
-#   - EMAIL_ADDRESS
+#   - "PERSON"
+#   - "ORG"
+#   - "GPE" # Geopolitical Entity (Countries, Cities, States)
+#   - "MONEY"
+#   - "DATE"
+#   - "TIME"
 
 # Semantic Search - Placeholder for future implementation
-# semantic_topics:
-#   - "financial information"
-#   - "personal health information"
+# semantic_phrases:
+#   - "sensitive financial data"
+#   - "internal discussion only"
+# semantic_threshold: 0.7 # Cosine similarity threshold

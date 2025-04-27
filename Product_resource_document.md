@@ -68,11 +68,12 @@ The proposed system will be built as a lightweight pipeline primarily using open
 * **Input:** Original video file and the list of (start, end) time intervals to redact.
 * **Output:** A new video file with the sensitive segments removed or redacted.
 
-### 4.4. Workflow Orchestration
+### 4.4. Workflow Orchestration & Deployment
 
-* **Description:** A central script (e.g., in Python) will orchestrate the execution of the above steps, handling file inputs, outputs, and error handling.
-* **Input:** Video file and configuration specifying sensitive content criteria.
-* **Output:** Redacted video file and a report of flagged segments.
+* **Description:** A central application (e.g., built with Python and a UI framework) will orchestrate the execution of the transcription, identification, and optional redaction steps. User interaction will primarily occur through a graphical user interface (GUI).
+* **Input:** Video file and configuration specifying sensitive content criteria (either default or user-provided via the UI).
+* **Output:** A list of flagged sensitive segments displayed in the UI, and optionally, a redacted video file if the user chooses to perform redaction.
+* **Deployment Target:** The primary deployment target is a standalone executable file for Windows (e.g., `.exe`), created using tools like PyInstaller. This allows end-users to run the application without needing to install Python or manage dependencies manually (though external dependencies like FFmpeg might still require separate handling or bundling).
 
 ## 5. Proposed Enhancements
 
@@ -80,8 +81,16 @@ In addition to the core functionality, the following enhancements would signific
 
 ### 5.1. User Interface
 
-* **Description:** A simple web-based user interface for uploading videos, defining sensitive content criteria, reviewing flagged segments, and downloading redacted videos.
-* **Benefit:** Provides a user-friendly experience for educators and administrators who may not be comfortable with command-line tools.
+* **Description:** A graphical user interface (GUI) designed for desktop use and packaged as a standalone Windows executable. This UI will allow users to:
+    * Upload video files.
+    * Input custom sensitive keywords/phrases (or choose to use defaults).
+    * Initiate the transcription and identification process.
+    * View a list of flagged sensitive segments, including start time, end time, and the detected text/reason.
+    * Integrate with a video player to display the uploaded video.
+    * Click on a flagged segment in the list to automatically seek the video player to the corresponding start time.
+    * (Future) Trigger actions on flagged segments, such as initiating redaction or marking false positives (linking to Enhancement 5.4).
+    *(Note: A web-based interface remains a potential future alternative or addition for broader accessibility).*
+* **Benefit:** Provides a user-friendly experience for educators and administrators who may not be comfortable with command-line tools, enabling easier review and interaction with the results directly on their Windows machines.
 
 ### 5.2. Speaker Diarization
 
