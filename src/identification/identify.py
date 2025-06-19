@@ -48,36 +48,39 @@ class SensitiveContentIdentifier:
             return {}
 
 
-    def identify_keywords(self, transcription_data: Dict[str, Any]) -> List[Dict[str, Any]]:
+    def identify_keywords(self, transcription_data: Dict[str, Any], custom_keywords: Optional[list] = None) -> List[Dict[str, Any]]:
         """
         Identifies sensitive segments based on keyword matching.
 
         Args:
             transcription_data: The loaded JSON data from Whisper transcription.
+            custom_keywords: Optional list of keywords/phrases to use instead of config keywords.
 
         Returns:
             A list of dictionaries, each representing a sensitive segment found
             (containing 'start', 'end', 'text', 'reason').
         """
         sensitive_segments = []
-        if not self.keywords:
-            logging.warning("No keywords defined in the configuration.")
+        # Use custom keywords if provided, else use self.keywords
+        keywords_to_use = [kw.lower() for kw in custom_keywords] if custom_keywords else self.keywords
+        if not keywords_to_use:
+            logging.warning("No keywords defined in the configuration or provided as custom input.")
             return sensitive_segments
         if 'segments' not in transcription_data:
             logging.warning("Transcription data does not contain 'segments'.")
             return sensitive_segments
 
-        logging.info(f"Identifying sensitive content using keywords: {self.keywords}")
+        logging.info(f"Identifying sensitive content using keywords: {keywords_to_use}")
 
         # Simple approach: Check each word individually
         for segment in transcription_data.get('segments', []):
             for word_info in segment.get('words', []):
                 original_word = word_info.get('word', '')
-                word_text = original_word.strip().lower()
+                word_text = original_word.strip().lower().strip('.,!?;:\"\'')
                 print(f"DEBUG: Checking word: '{original_word}' -> '{word_text}'") # DEBUG PRINT
 
                 # Basic check if the word itself is a keyword
-                if word_text in self.keywords:
+                if word_text in keywords_to_use:
                     print(f"DEBUG: Match found! Keyword: '{word_text}'") # DEBUG PRINT
                     sensitive_segments.append({
                         "start": word_info.get('start'),
