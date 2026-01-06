@@ -13,6 +13,7 @@ __pycache__/
 
 # Output directory (transcripts, redacted videos, etc.)
 output/
+Product_resource_document.md 
 
 # Large media files (videos, audio)
 *.mp4
